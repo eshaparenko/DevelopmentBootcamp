@@ -1,0 +1,8 @@
+
+Mongo Atlas cloud
+eugene_sh
+NNsskSDKH2L8zPDP
+
+
+
+mongosh "mongodb://ac-z5uxmyo-shard-00-00.m6scc8y.mongodb.net:27017,ac-z5uxmyo-shard-00-01.m6scc8y.mongodb.net:27017,ac-z5uxmyo-shard-00-02.m6scc8y.mongodb.net:27017/myFirstDatabase?replicaSet=atlas-7uw9wm-shard-0" --ssl --authenticationDatabase admin --username eugene_sh --password NNsskSDKH2L8zPDP

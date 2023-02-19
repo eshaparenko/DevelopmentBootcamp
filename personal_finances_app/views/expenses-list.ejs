@@ -1,0 +1,23 @@
+<%- include("partials/header"); %>
+    <h1>Expenses List</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Amount</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% expenses.forEach(expense => { %>
+          <tr>
+
+            <td><%= expense.category %></td>
+            <td><%= expense.amount %></td>
+            <td><%= expense.date.toLocaleDateString() %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <%- include("partials/footer"); %>

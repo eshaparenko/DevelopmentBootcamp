@@ -1,0 +1,68 @@
+<%- include("partials/header"); %>
+<h1>Expenses page</h1>
+
+<!-- views/expenses-form.ejs -->
+
+
+<div class="expenses-form">
+<form action="/expenses" method="post">
+    <div>
+      <label class="col-25" for="amount">Amount:</label>
+      <% if (typeof amount !== 'undefined') { %>
+      <input class="col-75" type="number" id="amount" name="amount" value=<%= amount %>>
+      <% } else {%>
+        <input class="col-75" type="number" id="amount" name="amount">
+        <% } %>
+      <% if (typeof amount !== 'undefined' && amount === '') { %>
+        <p class="error">Amount is required</p>
+        <% } %>
+    </div>
+  
+    <div>
+      <label class="col-25" for="category">Category:</label>
+      <% if (typeof category !== 'undefined') { %>
+        <input class="col-75" type="text" id="category" name="category" value=<%= category %>>
+        <% } else {%>
+          <input class="col-75" type="text" id="category" name="category">
+          <% } %>
+      <% if (typeof category !== 'undefined' && category === '') { %>
+        <p class="error">Category is required</p>
+        <% } %>
+    </div>
+  
+    <div>
+      <label class="col-25" for="date">Date:</label>
+      <% if (typeof date !== 'undefined') { %>
+        <input class="col-75" type="date" id="date" name="date" value=<%= date %>>
+        <% } else {%>
+          <input class="col-75" type="date" id="date" name="date">
+          <% } %>
+      <% if (typeof date !== 'undefined' && date === '') { %>
+        <p class="error">Date is required</p>
+        <% } %>
+    </div>
+  
+    <button type="submit">Save</button>
+    <% if (typeof successMessage !== 'undefined' && successMessage) { %>
+        <div id="success-message">
+          <%= successMessage %>
+        </div>
+        <script>
+            setTimeout(function() {
+              document.getElementById("success-message").style.display = "none";
+            }, 3000);
+          </script>
+      <% } %>
+      <% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
+        <div id="error-message">
+          <%= errorMessage %>
+        </div>
+        <script>
+            setTimeout(function() {
+              document.getElementById("error-message").style.display = "none";
+            }, 3000);
+          </script>
+      <% } %>
+  </form>
+</div>
+  <%- include("partials/footer"); %>

@@ -1,13 +1,16 @@
 <%- include("partials/header"); %>
     <h1>Home page</h1>
-    
+
+    <div class="content overflow-auto">
     <% allPosts.forEach(post => { %>
         <h1><%= post.title %></h1>
         <p>
             <%= post.body.length > 100 ? `${post.body.substring(0, 100)}...`: post.body; %>
-            <a href="/posts/ <%= post.title %>">Read more</a>
+            <a href="/posts/<%= post._id %>">Read more</a>
         </p>
     <% }) %>
-    <a class="btn btn-primary" href="/compose" role="button">Add new post\</a>
+    </div>
+    <a class="btn btn-primary compose" href="/compose" role="button">Add new post</a>
+
 
 <%- include("partials/footer"); %>

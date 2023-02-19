@@ -11,13 +11,14 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static("public"));
 
 // Connection URI
-const uri = "mongodb://localhost:27017";
+// const uri = "mongodb://localhost:27017";
+const uri = "mongodb+srv://eugene_sh:NNsskSDKH2L8zPDP@cluster0.m6scc8y.mongodb.net";
+
 const dbName = "todolistDB";
 mongoose.set('strictQuery', false);
 mongoose.connect(`${uri}/${dbName}`);
 
 let foundItems = [];
-let workItems = [];
 
 const itemsSchema = new mongoose.Schema({
     name: String
@@ -25,18 +26,12 @@ const itemsSchema = new mongoose.Schema({
 
 const Item = mongoose.model("Item", itemsSchema);
 
-const workItemsSchema = new mongoose.Schema({
-    name: String
-})
-
 const listSchema = new mongoose.Schema({
     name: String,
     items: [itemsSchema]
 });
 
 const List = mongoose.model("List", listSchema)
-
-const WorkItem = mongoose.model("WorkItem", workItemsSchema);
 
 const item1 = new Item({
     name: "Welcome to your todo list!"
@@ -51,16 +46,6 @@ const item3 = new Item({
 })
 
 const defaultItems = [item1, item2, item3];
-
-Item.find((err, items)=> {
-    if(err) {
-        console.log(err)
-    } else {
-        items.forEach(item => {
-            console.log(item.name)
-        })
-    }
-})
 
 app.get("/", (req, res)=>{
     Item.find((err, foundItems)=> {
@@ -97,7 +82,7 @@ app.post("/", (req, res) => {
                 foundList.save();
                 res.redirect("/" + listName);
             }
-        })
+        })  
     }
     
 })
@@ -148,6 +133,11 @@ app.get("/about", (req, res) => {
     res.render("about");
 })
 
-app.listen(3000, ()=>{
-    console.log("Server started on port 3000")
+let port = process.env.PORT;
+if  (port === null || port === "" || port === undefined) {
+    port = 3000;
+}
+
+app.listen(port, ()=>{
+    console.log(`Server started on port ${port}`)
 });
