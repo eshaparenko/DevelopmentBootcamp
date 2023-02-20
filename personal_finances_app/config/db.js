@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const encrypt = require('mongoose-encryption');
 const dotenv = require("dotenv");
 dotenv.config({path: __dirname + "/config.env"})
 const uri = process.env.MONGO_URI;

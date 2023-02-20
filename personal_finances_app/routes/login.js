@@ -20,6 +20,8 @@ router.post("/", function(req, res){
             if (foundUser) {
                 if (foundUser.password === password) {
                     res.render("secrets")
+                } else {
+                    res.render("login", {error: "Password is incorrect"})
                 }
             }
         }
