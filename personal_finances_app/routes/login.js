@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router();
 const User = require("../models/User");
+const md5 = require("md5");
 
 router.get("/", function(req, res){
     res.render("login");
@@ -18,7 +19,7 @@ router.post("/", function(req, res){
             console.log(err);
         } else {
             if (foundUser) {
-                if (foundUser.password === password) {
+                if (foundUser.password === md5(password)) {
                     res.render("secrets")
                 } else {
                     res.render("login", {error: "Password is incorrect"})
