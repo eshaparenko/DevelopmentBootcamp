@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router();
 const User = require("../models/User");
-const md5 = require("md5");
+const bcrypt = require("bcrypt-nodejs");
 
 router.get("/", function(req, res){
     res.render("login");
@@ -19,11 +19,15 @@ router.post("/", function(req, res){
             console.log(err);
         } else {
             if (foundUser) {
-                if (foundUser.password === md5(password)) {
-                    res.render("secrets")
-                } else {
-                    res.render("login", {error: "Password is incorrect"})
-                }
+                bcrypt.compare(password, foundUser.password, (err, result) => {
+                    if (result === true) {
+                        res.render("secrets")
+                    } else {
+                        res.render("login", {error: "Password is incorrect"})
+                    }
+                })
+            } else {
+                res.render("login", {error: "User does not exist"})
             }
         }
     })
